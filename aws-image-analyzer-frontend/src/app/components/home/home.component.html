@@ -1,0 +1,37 @@
+<div class="control-section">
+  <div class="upload-section">
+    <h2>Upload Image</h2>
+    <div class="upload-controls">
+      <label for="file-upload" class="custom-file-upload">
+        {{ selectedFile?.name || 'Choose File' }}
+      </label>
+      <input id="file-upload" type="file" (change)="onFileSelected($event)" />
+      <button (click)="upload()" class="upload-button">
+        <i class="fa-solid fa-upload"></i>
+      </button>
+    </div>
+    <p *ngIf="uploadMessage" class="upload-message" [ngClass]="messageClass">
+      {{ uploadMessage }}
+    </p>
+  </div>
+
+  <div class="search-section">
+    <h2>Search Images</h2>
+    <div class="search-controls">
+      <input type="text" [(ngModel)]="keyword" placeholder="Enter keyword" />
+      <button (click)="search()" class="search-button">
+        <i class="fas fa-search"></i>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="results-section" *ngIf="images.length > 0">
+  <div class="gallery">
+    <img *ngFor="let image of images" [src]="image" alt="Image" />
+  </div>
+</div>
+
+<div *ngIf="images.length === 0 && searched" class="no-results">
+  No images found.
+</div>
